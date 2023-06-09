@@ -14,7 +14,8 @@ module.exports = {
       lessDark: '#282b30',
       gray : '#99aab5',
       white : 'white',
-      black : 'black'
+      black : 'black',
+      transparent : 'transparent'
     },
     extend: {},
   },

@@ -40,12 +40,18 @@
 
         <div class="item" id="Projects">
           <div class="item-content left-[100vw]">
-            <div class="about-box">
-              <img src="@/static/city/mainRoof.svg" class="roof"/>
-              <div class="about-header">Web developer, AI fan, IT artist</div>
-              <div class="about-content">
-                Who am I?
-              </div>
+            <div class="projects-box">
+                <div class="house">
+                  <project-card
+                    v-for="project in projects" :key="project.title"
+                    :title = "project.title"
+                    :lang="project.lang"
+                    :link = "project.link"
+                  />
+                </div>
+                <div class="first-floor">
+                  <div class="wide-door"></div>
+                </div>
             </div>
           </div>
         </div>
@@ -60,7 +66,39 @@ export default {
   data() {
     return {
       checkpoints: ['About', 'Projects', 'Social', 'Team'],
-      currentPoint: 'About'
+      currentPoint: 'About',
+      projects: [
+        {
+          title : "Ayugram",
+          lang : "C++",
+          link : ''
+        },
+        {
+          title : 'NeoVisionBot',
+          lang : "Python",
+          link : ''
+        },
+        {
+          title : 'web-log-manager',
+          lang : "Vue, Python",
+          link : ""
+        },
+        {
+          title : "shg-site",
+          lang : "Vue",
+          link : ""
+        },
+        {
+          title : "aiogram-framework",
+          lang : "Python",
+          link : ""
+        },
+        {
+          title : "EventsManager",
+          lang : "Vue, Python",
+          link : ""
+        }
+      ]
     }
   },
   mounted() {
