@@ -1,5 +1,7 @@
 <template>
   <div class="root">
+    <div class="bottom"></div>
+
     <video id="background-video" autoplay loop muted poster="background.png">
       <source src="shgBack.mp4" type="video/mp4">
     </video>
@@ -15,25 +17,38 @@
           class="flex"
           :key="point"
         >
-          <div class="navigator-point" @click="selectPoint(point)">{{ point }}</div>
+          <div class="navigator-point z-50" @click="selectPoint(point)">{{ point }}</div>
 
           <div class="divider" v-show="checkpoints.indexOf(point) !== checkpoints.length - 1"></div>
         </div>
       </div>
 
       <div class="content-slider">
-        <div class="item" id="about">
-          <div class="about-box">
-            <img src="@/static/city/mainRoof.svg" class="roof"/>
-            <div class="about-header">Web developer, AI art fan, freelancer, IT artist</div>
-            <div class="about-content">
-              Hello there! I'm a freelance programmer from Russia.
-              My specialty is web development.
-              I don't see my work without a certain role of creativity, because in my opinion, programming is an art.
+        <div class="item" id="About">
+          <div class="item-content">
+            <div class="about-box">
+              <img src="@/static/city/mainRoof.svg" class="roof"/>
+              <div class="about-header">Web developer, AI fan, IT artist</div>
+              <div class="about-content">
+                Hello there! I'm a freelance programmer from Russia.
+                My specialty is web development.
+                I don't see my work without a certain role of creativity, because in my opinion, programming is an art.
+              </div>
             </div>
           </div>
         </div>
-        <div class="bottom"></div>
+
+        <div class="item" id="Projects">
+          <div class="item-content left-[100vw]">
+            <div class="about-box">
+              <img src="@/static/city/mainRoof.svg" class="roof"/>
+              <div class="about-header">Web developer, AI fan, IT artist</div>
+              <div class="about-content">
+                Who am I?
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -50,10 +65,10 @@ export default {
   },
   mounted() {
     // TODO paint city and type some text in house bodies
-    this.selectPoint('About')
+    this.selectPoint('About', true)
   },
   methods: {
-    selectPoint(point) {
+    selectPoint(point, isMounted) {
       let points = this.$refs.navigator.getElementsByClassName('navigator-point')
       this.currentPoint = point;
 
@@ -65,7 +80,13 @@ export default {
         }
       }
 
-      // scrollIntoView to the #point
+      if (!isMounted) {
+        document.getElementById(point).scrollIntoView({
+          behavior: 'smooth',
+          inline: "start",
+          alignToTop : false
+        })
+      }
     }
   }
 }

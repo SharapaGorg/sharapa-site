@@ -6,7 +6,7 @@
 @tailwind utilities;
 
 *::-webkit-scrollbar {
-  width : 0 !important;
+  width: 0 !important;
 }
 
 body {
@@ -15,7 +15,7 @@ body {
 }
 
 .root {
-    @apply w-full;
+  @apply w-full;
 }
 
 #background-video {
@@ -26,9 +26,9 @@ body {
 }
 
 .main-header {
-    @apply px-8 py-4 border-[15px]
-    mx-auto w-fit text-9xl font-bold border-black
-    mt-[calc(50vh-95px)] backdrop-blur-sm;
+  @apply px-8 py-4 border-[15px]
+  mx-auto w-fit text-9xl font-bold border-black
+  mt-[calc(50vh-95px)] backdrop-blur-sm;
 }
 
 .content-container {
@@ -36,12 +36,13 @@ body {
 }
 
 .navigator {
-    @apply flex text-white w-fit mx-auto select-none mb-[20px];
+  @apply flex text-white w-fit mx-auto select-none
+  mb-[20px];
 }
 
 .navigator-point {
   @apply px-4 pt-1 cursor-pointer text-lg rounded-md;
-  transition : all .15s linear;
+  transition: all .15s linear;
 }
 
 .navigator .divider {
@@ -50,18 +51,20 @@ body {
 }
 
 .navigator-point:hover {
-  /*@apply bg-aqua*/
   @apply text-aqua
 }
 
 .content-slider {
-  @apply w-screen overflow-x-hidden flex;
-  /*height : calc(100% - 55px);*/
+  @apply w-screen overflow-x-auto overflow-y-hidden absolute;
+  bottom: -100vh;
+  white-space: nowrap;
+  /*height: calc(100vh - 55px);*/
+  height : 100vh;
 }
 
 .content-slider .item {
-    @apply w-screen absolute;
-    bottom: calc(-100vh + 50px);
+  @apply w-screen inline-block overflow-hidden h-screen pt-[50px];
+  white-space: normal;
 }
 
 /* About block */
@@ -81,8 +84,13 @@ body {
 }
 
 .about-box .roof {
-  @apply w-[90%] block mx-auto;}
+  @apply w-[90%] block mx-auto;
+}
 
 .bottom {
-  @apply h-[100px] absolute bottom-[-100vh] w-full bg-aqua;
+  @apply h-[100px] w-screen bg-aqua absolute bottom-[-100vh] left-0;
+}
+
+.item-content {
+  @apply absolute bottom-[50px] w-screen
 }
