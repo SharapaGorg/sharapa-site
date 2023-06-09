@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*::-webkit-scrollbar {
+  width : 0 !important;
+}
+
+body {
+  @apply overflow-x-hidden;
+  font-family: 'Righteous', cursive;
+}
+
+.root {
+    @apply w-full;
+}
+
+#background-video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.main-header {
+    @apply px-8 py-4 border-[15px]
+    mx-auto w-fit text-9xl font-bold border-black
+    mt-[calc(50vh-95px)] backdrop-blur-sm;
+}
+
+.content-container {
+  @apply w-screen h-screen bg-dark pt-[15px];
+}
+
+.navigator {
+    @apply flex text-white w-fit mx-auto select-none mb-[20px];
+}
+
+.navigator-point {
+  @apply px-4 pt-1 cursor-pointer text-lg rounded-md;
+  transition : all .15s linear;
+}
+
+.navigator .divider {
+  @apply w-[3px] h-[35px] mx-4 bg-white
+  relative top-[-2px]
+}
+
+.navigator-point:hover {
+  /*@apply bg-aqua*/
+  @apply text-aqua
+}
+
+.content-slider {
+  @apply w-screen overflow-x-hidden flex;
+  /*height : calc(100% - 55px);*/
+}
+
+.content-slider .item {
+    @apply w-screen absolute;
+    bottom: calc(-100vh + 50px);
+}
+
+/* About block */
+
+.about-box {
+  @apply w-[80%] md:w-2/3 lg:w-1/4 mt-[50px] mx-auto
+}
+
+.about-header {
+  @apply text-aqua border-4 border-aqua rounded-md px-3 py-2
+  w-full text-center text-lg
+}
+
+.about-content {
+  @apply text-white w-[80%] mx-auto text-justify pt-2
+  border-l-4 border-r-4 border-aqua px-4 min-h-[250px];
+}
+
+.about-box .roof {
+  @apply w-[90%] block mx-auto;}
+
+.bottom {
+  @apply h-[100px] absolute bottom-[-100vh] w-full bg-aqua;
+}

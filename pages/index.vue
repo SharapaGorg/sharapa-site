@@ -1,0 +1,72 @@
+<template>
+  <div class="root">
+    <video id="background-video" autoplay loop muted poster="background.png">
+      <source src="shgBack.mp4" type="video/mp4">
+    </video>
+
+    <div class="w-screen h-screen absolute left-0 top-0">
+      <div class="main-header">SHG</div>
+    </div>
+
+    <div class="content-container">
+      <div class="navigator" ref="navigator">
+        <div
+          v-for="point in checkpoints"
+          class="flex"
+          :key="point"
+        >
+          <div class="navigator-point" @click="selectPoint(point)">{{ point }}</div>
+
+          <div class="divider" v-show="checkpoints.indexOf(point) !== checkpoints.length - 1"></div>
+        </div>
+      </div>
+
+      <div class="content-slider">
+        <div class="item" id="about">
+          <div class="about-box">
+            <img src="@/static/city/mainRoof.svg" class="roof"/>
+            <div class="about-header">Web developer, AI art fan, freelancer, IT artist</div>
+            <div class="about-content">
+              Hello there! I'm a freelance programmer from Russia.
+              My specialty is web development.
+              I don't see my work without a certain role of creativity, because in my opinion, programming is an art.
+            </div>
+          </div>
+        </div>
+        <div class="bottom"></div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'IndexPage',
+  data() {
+    return {
+      checkpoints: ['About', 'Projects', 'Social', 'Team'],
+      currentPoint: 'About'
+    }
+  },
+  mounted() {
+    // TODO paint city and type some text in house bodies
+    this.selectPoint('About')
+  },
+  methods: {
+    selectPoint(point) {
+      let points = this.$refs.navigator.getElementsByClassName('navigator-point')
+      this.currentPoint = point;
+
+      for (let p of points) {
+        if (p.innerText === point) {
+          p.classList.add('text-aqua')
+        } else {
+          p.classList.remove('text-aqua')
+        }
+      }
+
+      // scrollIntoView to the #point
+    }
+  }
+}
+</script>
