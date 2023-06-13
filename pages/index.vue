@@ -1,7 +1,5 @@
 <template>
   <div class="root">
-    <div class="bottom"></div>
-
     <video id="background-video" autoplay loop muted poster="background.png">
       <source src="shgBack.mp4" type="video/mp4">
     </video>
@@ -23,8 +21,13 @@
         </div>
       </div>
 
+
       <div class="content-slider">
         <div class="item" id="About">
+          <div class="wheel-container">
+            <img src="@/static/wheel.png" class="wheel" ref="wheel"/>
+          </div>
+
           <div class="item-content">
             <div class="about-box">
               <img src="@/static/city/mainRoof.svg" class="roof"/>
@@ -43,7 +46,8 @@
             <div class="projects-box">
                 <div class="house">
                   <project-card
-                    v-for="project in projects" :key="project.title"
+                    v-for="project in projects"
+                    :key="project.title"
                     :title = "project.title"
                     :lang="project.lang"
                     :link = "project.link"
@@ -57,6 +61,8 @@
         </div>
       </div>
     </div>
+
+    <div class="bottom z-50"></div>
   </div>
 </template>
 
@@ -67,6 +73,7 @@ export default {
     return {
       checkpoints: ['About', 'Projects', 'Social', 'Team'],
       currentPoint: 'About',
+      wheelRotation : 0,
       projects: [
         {
           title : "Ayugram",
@@ -89,21 +96,12 @@ export default {
           link : ""
         },
         {
-          title : "aiogram-framework",
-          lang : "Python",
-          link : ""
-        },
-        {
           title : "EventsManager",
           lang : "Vue, Python",
           link : ""
         }
       ]
     }
-  },
-  mounted() {
-    // TODO paint city and type some text in house bodies
-    this.selectPoint('About', true)
   },
   methods: {
     selectPoint(point, isMounted) {
@@ -126,6 +124,15 @@ export default {
         })
       }
     }
-  }
+  },
+  mounted() {
+    // TODO paint city and type some text in house bodies
+    this.selectPoint('About', true)
+
+    setInterval(() => {
+        this.$refs.wheel.style.transform = `rotateZ(${this.wheelRotation}deg)`
+        this.wheelRotation += 5;
+    }, 50)
+  },
 }
 </script>

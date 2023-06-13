@@ -71,11 +71,11 @@ body {
 
 .about-header {
   @apply text-aqua border-4 border-aqua rounded-md px-3 py-2
-  w-full text-center text-lg
+  w-full text-center text-lg bg-dark
 }
 
 .about-content {
-  @apply text-white w-[80%] mx-auto text-justify pt-2
+  @apply text-white w-[80%] mx-auto text-justify pt-2 bg-dark
   border-l-4 border-r-4 border-aqua px-4 min-h-[250px];
 }
 
@@ -87,8 +87,21 @@ body {
   @apply h-[100px] w-screen bg-aqua absolute bottom-[-100vh] left-0;
 }
 
+.bottom-header {
+  @apply mx-auto w-fit text-2xl font-bold mt-[34px]
+}
+
+.wheel-container {
+  @apply absolute w-[200vw] left-[-50vw] md:left-0 md:w-screen bottom-[-100px];
+}
+
+.wheel {
+  @apply w-[75%] md:w-2/3 lg:w-[40%] block mx-auto;
+  transition : all .1s ease;
+}
+
 .item-content {
-  @apply absolute bottom-[50px] w-screen
+  @apply absolute bottom-[50px] w-screen z-50
 }
 
 .projects-box {
@@ -109,3 +122,4 @@ body {
   @apply w-[50px] mx-auto h-[70px] mt-[10px]
   rounded-tl-lg rounded-tr-lg bg-aqua
 }
+
