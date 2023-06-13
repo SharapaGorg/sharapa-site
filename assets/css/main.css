@@ -87,6 +87,14 @@ body {
   @apply h-[100px] w-screen bg-aqua absolute bottom-[-100vh] left-0;
 }
 
+.bottom .grass-container {
+  @apply w-full mt-[-60px] flex;
+}
+
+.grass-container img {
+  @apply max-h-[75px]
+}
+
 .bottom-header {
   @apply mx-auto w-fit text-2xl font-bold mt-[34px]
 }

@@ -62,7 +62,16 @@
       </div>
     </div>
 
-    <div class="bottom z-50"></div>
+    <div class="bottom z-50">
+        <div class="grass-container">
+          <img
+            v-for="grass in grassContainer"
+            :key="grass.id"
+            :src="'/grass/' + grass.value + '.png'"
+            :style="{ marginRight : grass.margin + 'px'}"
+          />
+        </div>
+    </div>
   </div>
 </template>
 
@@ -74,6 +83,7 @@ export default {
       checkpoints: ['About', 'Projects', 'Social', 'Team'],
       currentPoint: 'About',
       wheelRotation : 0,
+      grassContainer : [],
       projects: [
         {
           title : "Ayugram",
@@ -104,6 +114,17 @@ export default {
     }
   },
   methods: {
+    $getRandomItem(array) {
+      return array[Math.floor(Math.random()*array.length)];
+    },
+    getRandomInt(max) {
+      let a = Math.floor(Math.random() * max);
+
+      while (a < 50) {
+         a = Math.floor(Math.random() * max);
+      }
+      return a;
+    },
     selectPoint(point, isMounted) {
       let points = this.$refs.navigator.getElementsByClassName('navigator-point')
       this.currentPoint = point;
@@ -126,13 +147,24 @@ export default {
     }
   },
   mounted() {
-    // TODO paint city and type some text in house bodies
     this.selectPoint('About', true)
 
+    // rotating windmill
     setInterval(() => {
         this.$refs.wheel.style.transform = `rotateZ(${this.wheelRotation}deg)`
         this.wheelRotation += 5;
     }, 50)
+
+    // generating grass on the floor
+    let floorWidth = window.innerWidth
+    for (let i = 0; i < floorWidth / 250; i++) {
+        let randomGrass = this.$getRandomItem([1, 2, 3, 4])
+        this.grassContainer.push({
+          id : i,
+          value : randomGrass,
+          margin : this.getRandomInt(250)
+        })
+    }
   },
 }
 </script>
