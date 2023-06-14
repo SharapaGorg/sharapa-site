@@ -44,32 +44,44 @@
         <div class="item" id="Projects">
           <div class="item-content left-[100vw]" @click.self="activeProject = -1">
             <div class="projects-box">
+              <div
+                class="project-info"
+                ref="projectInfo"
+                :style="{'transform' : activeProject === -1 ? 'translateY(100px)' : 'translateY(20px)'}"
+              >
+                <img
+                  src="@/static/github.svg"
+                  class="github-icon"
+                  @click="openTab('github')"
+                  :style="{ 'transform' : (activeProject === -1 || !hasGithubLink()) ? '' : 'translateX(-53px)'}"
+                />
+
+                <img
+                  src="@/static/telegram.svg"
+                  class="telegram-icon"
+                  @click="openTab('telegram')"
+                  :style="{ 'transform' : (activeProject === -1 || !hasTelegramLink()) ? 'translateX(200px)' : 'translateX(253px)'}"
+                />
+
+                <div class="header">{{ $activeProject.title }}</div>
+                <div class="project-description">{{ $activeProject.desc }}</div>
+              </div>
+              <div class="house">
                 <div
-                  class="project-info"
-                  ref="projectInfo"
-                  :style="{'transform' : activeProject === -1 ? 'translateY(100px)' : 'translateY(20px)'}"
+                  @click="projectHover(project)"
+                  v-for="project in projects"
+                  :key="project.title"
                 >
-                  <div class="header">{{ $activeProject.title }}</div>
-                  <div class="project-links">
-                    <img src="@/static/github.svg" />
-                  </div>
+                  <project-card
+                    :title="project.title"
+                    :lang="project.lang"
+                    :link="project.link"
+                  />
                 </div>
-                <div class="house">
-                  <div
-                    @click="projectHover(project)"
-                    v-for="project in projects"
-                    :key="project.title"
-                  >
-                    <project-card
-                      :title = "project.title"
-                      :lang="project.lang"
-                      :link = "project.link"
-                    />
-                  </div>
-                </div>
-                <div class="first-floor">
-                  <div class="wide-door"></div>
-                </div>
+              </div>
+              <div class="first-floor">
+                <div class="wide-door"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -77,14 +89,14 @@
     </div>
 
     <div class="bottom z-50">
-        <div class="grass-container">
-          <img
-            v-for="grass in grassContainer"
-            :key="grass.id"
-            :src="'/grass/' + grass.value + '.png'"
-            :style="{ marginRight : grass.margin + 'px'}"
-          />
-        </div>
+      <div class="grass-container">
+        <img
+          v-for="grass in grassContainer"
+          :key="grass.id"
+          :src="'/grass/' + grass.value + '.png'"
+          :style="{ marginRight : grass.margin + 'px'}"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -96,40 +108,61 @@ export default {
     return {
       checkpoints: ['About', 'Projects', 'Social', 'Team'],
       currentPoint: 'About',
-      wheelRotation : 0,
-      grassContainer : [],
-      activeProject : -1,
-      lastActiveProject : -1,
+      wheelRotation: 0,
+      grassContainer: [],
+      activeProject: -1,
+      lastActiveProject: -1,
+      showProjectLinks: false,
       projects: [
         {
-          id : 0,
-          title : "Ayugram",
-          lang : "C++",
-          link : ''
+          id: 0,
+          title: "Ayugram",
+          lang: "C++",
+          desc: "Custom telegram client",
+          links: {
+            github: 'https://github.com/Ayugram',
+            telegram: 'https://t.me/ayugram1338'
+          }
         },
         {
-          id : 1,
-          title : 'NeoVisionBot',
-          lang : "Python",
-          link : ''
+          id: 1,
+          title: 'NeoVisionBot',
+          lang: "Python",
+          desc: "Tg bot with OpenAI functions",
+          links: {
+            github: '',
+            telegram: 'https://t.me/neuro_network_bot',
+          }
         },
         {
-          id : 2,
-          title : 'web-log-manager',
-          lang : "Vue, Python",
-          link : ""
+          id: 2,
+          title: 'web-log-manager',
+          lang: "Vue, Python",
+          desc: "Webpage for logging data",
+          links: {
+            telegram: '',
+            github: "https://github.com/SharapaGorg/web-log-manager",
+          }
         },
         {
-          id : 3,
-          title : "shg-site",
-          lang : "Vue",
-          link : ""
+          id: 3,
+          title: "shg-site",
+          lang: "Vue",
+          desc: "My own site (you are on it)",
+          links: {
+            telegram: '',
+            github: "https://github.com/SharapaGorg/sharapa-site",
+          }
         },
         {
-          id : 3,
-          title : "EventsManager",
-          lang : "Vue, Python",
-          link : ""
+          id: 4,
+          title: "EventsManager",
+          lang: "Vue, Python",
+          desc: "Webpage for managing time",
+          links: {
+            telegram: '',
+            github: "https://github.com/SharapaGorg/EventsManager",
+          }
         }
       ],
     }
@@ -145,15 +178,36 @@ export default {
   },
   methods: {
     $getRandomItem(array) {
-      return array[Math.floor(Math.random()*array.length)];
+      return array[Math.floor(Math.random() * array.length)];
     },
     getRandomInt(max) {
       let a = Math.floor(Math.random() * max);
 
       while (a < 50) {
-         a = Math.floor(Math.random() * max);
+        a = Math.floor(Math.random() * max);
       }
       return a;
+    },
+    openTab(icon) {
+      try {
+        window.open(this.$activeProject.links[icon])
+      } catch (e) {
+        return
+      }
+    },
+    hasGithubLink() {
+      try {
+        return this.$activeProject.links.github.length > 0
+      } catch (e) {
+        return true
+      }
+    },
+    hasTelegramLink() {
+      try {
+        return this.$activeProject.links.telegram.length > 0
+      } catch (e) {
+        return true
+      }
     },
     projectHover(project) {
       this.activeProject = project.id
@@ -175,7 +229,7 @@ export default {
         document.getElementById(point).scrollIntoView({
           behavior: 'smooth',
           inline: "start",
-          alignToTop : false
+          alignToTop: false
         })
       }
     }
@@ -185,19 +239,19 @@ export default {
 
     // rotating windmill
     setInterval(() => {
-        this.$refs.wheel.style.transform = `rotateZ(${this.wheelRotation}deg)`
-        this.wheelRotation += 5;
+      this.$refs.wheel.style.transform = `rotateZ(${this.wheelRotation}deg)`
+      this.wheelRotation += 5;
     }, 50)
 
     // generating grass on the floor
     let floorWidth = window.innerWidth
     for (let i = 0; i < floorWidth / 250; i++) {
-        let randomGrass = this.$getRandomItem([1, 2, 3, 4])
-        this.grassContainer.push({
-          id : i,
-          value : randomGrass,
-          margin : this.getRandomInt(250)
-        })
+      let randomGrass = this.$getRandomItem([1, 2, 3, 4])
+      this.grassContainer.push({
+        id: i,
+        value: randomGrass,
+        margin: this.getRandomInt(250)
+      })
     }
   },
 }

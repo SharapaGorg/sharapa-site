@@ -132,20 +132,30 @@ body {
 }
 
 .project-info {
-  @apply w-full mx-auto px-3 py-2 border-4 border-aqua
+  @apply w-[90%] mx-auto py-2 border-4 border-aqua
   text-aqua border-b-0 rounded-t-lg pb-5;
   transform : translateY(100px);
   transition : all .25s ease;
 }
 
 .project-info .header {
-  @apply w-full mb-1
+  @apply w-full text-xl text-center bg-dark z-50 relative px-2;
 }
 
-.project-links {
-  @apply flex;
+.project-info .project-description {
+  @apply w-full text-white bg-dark z-50 relative pt-1 px-2;
 }
 
-.project-links img {
-    @apply w-[30px]
+.project-info img {
+  @apply w-[50px] p-[7px] absolute block z-10 border-aqua cursor-pointer;
+  transition : all .5s ease;
+}
+
+.project-info .github-icon {
+  @apply rounded-l-lg border-4 border-r-0
+}
+
+.project-info .telegram-icon {
+  @apply rounded-r-lg border-4 border-l-0;
+  transform : translateX(200px);
 }
