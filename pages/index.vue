@@ -42,16 +42,30 @@
         </div>
 
         <div class="item" id="Projects">
-          <div class="item-content left-[100vw]">
+          <div class="item-content left-[100vw]" @click.self="activeProject = -1">
             <div class="projects-box">
+                <div
+                  class="project-info"
+                  ref="projectInfo"
+                  :style="{'transform' : activeProject === -1 ? 'translateY(100px)' : 'translateY(20px)'}"
+                >
+                  <div class="header">{{ $activeProject.title }}</div>
+                  <div class="project-links">
+                    <img src="@/static/github.svg" />
+                  </div>
+                </div>
                 <div class="house">
-                  <project-card
+                  <div
+                    @click="projectHover(project)"
                     v-for="project in projects"
                     :key="project.title"
-                    :title = "project.title"
-                    :lang="project.lang"
-                    :link = "project.link"
-                  />
+                  >
+                    <project-card
+                      :title = "project.title"
+                      :lang="project.lang"
+                      :link = "project.link"
+                    />
+                  </div>
                 </div>
                 <div class="first-floor">
                   <div class="wide-door"></div>
@@ -84,33 +98,49 @@ export default {
       currentPoint: 'About',
       wheelRotation : 0,
       grassContainer : [],
+      activeProject : -1,
+      lastActiveProject : -1,
       projects: [
         {
+          id : 0,
           title : "Ayugram",
           lang : "C++",
           link : ''
         },
         {
+          id : 1,
           title : 'NeoVisionBot',
           lang : "Python",
           link : ''
         },
         {
+          id : 2,
           title : 'web-log-manager',
           lang : "Vue, Python",
           link : ""
         },
         {
+          id : 3,
           title : "shg-site",
           lang : "Vue",
           link : ""
         },
         {
+          id : 3,
           title : "EventsManager",
           lang : "Vue, Python",
           link : ""
         }
-      ]
+      ],
+    }
+  },
+  computed: {
+    $activeProject() {
+      if (this.lastActiveProject === -1) return {}
+      return this.projects[this.lastActiveProject]
+    },
+    $project() {
+      return this.$refs.projectInfo
     }
   },
   methods: {
@@ -124,6 +154,10 @@ export default {
          a = Math.floor(Math.random() * max);
       }
       return a;
+    },
+    projectHover(project) {
+      this.activeProject = project.id
+      this.lastActiveProject = project.id
     },
     selectPoint(point, isMounted) {
       let points = this.$refs.navigator.getElementsByClassName('navigator-point')

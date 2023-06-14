@@ -18,7 +18,7 @@ export default {
 
 .project-card {
   @apply w-full rounded-lg border-aqua border-4
-  px-3 py-2 cursor-pointer mb-2
+  px-3 py-2 cursor-pointer mb-2 bg-dark;
 }
 
 .project-card .header {
