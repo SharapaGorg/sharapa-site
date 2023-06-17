@@ -91,19 +91,22 @@
         </div>
 
         <div class="item" id="Social">
-          Social page
-        </div>
-
-        <div class="item" id="Team">
-          <div class="item-content">
-            <div class="w-fit mx-auto">
-              <div class="half-circle"></div>
-              <div class="radolyn-house">
-                <img src="@/static/radolyn.svg" class="radolyn"/>
-                <div class="tube"></div>
-              </div>
+          <div class="w-full h-full flex items-center">
+            <div class="social-container">
+                  <div
+                      v-for="box in social"
+                      :key="box.icon"
+                      class="social-row"
+                  >
+                    <img :src="box.icon" class="icon" />
+                    <span
+                      @click="$copyToClipboard(box.link)"
+                      :style="{ color : showCheckMark === box.link ? '#6be3a2' : 'white'}"
+                    >{{ box.preview }}</span>
+                  </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -134,6 +137,25 @@ export default {
       lastActiveProject: -1,
       showProjectLinks: false,
       bubbles: [],
+      checkMarkHandler : null,
+      showCheckMark : false,
+      social: [
+        {
+          icon : 'github.svg',
+          preview : 'github.com/SharapaGorg',
+          link : 'https://github.com/SharapaGorg'
+        },
+        {
+          icon : 'telegram.svg',
+          preview : 't.me/sharapagorg',
+          link : 'https://t.me/sharapagorg'
+        },
+        {
+          icon : 'civitai.png',
+          preview : 'civitai.com/user/SharapaGorg',
+          link : 'https://civitai.com/user/SharapaGorg'
+        }
+      ],
       projects: [
         {
           id: 0,
@@ -189,6 +211,9 @@ export default {
     }
   },
   computed: {
+    show() {
+      return show
+    },
     $activeProject() {
       if (this.lastActiveProject === -1) return {}
       return this.projects[this.lastActiveProject]
@@ -198,6 +223,18 @@ export default {
     }
   },
   methods: {
+    $copyToClipboard(text) {
+      navigator.clipboard.writeText(text);
+
+      if (this.checkMarkHandler !== null) {
+        clearTimeout(this.checkMarkHandler)
+      }
+
+      this.showCheckMark = text;
+      this.checkMarkHandler = setTimeout(() => {
+        this.showCheckMark = false;
+      }, 1000)
+    },
     $getRandomItem(array) {
       return array[Math.floor(Math.random() * array.length)];
     },

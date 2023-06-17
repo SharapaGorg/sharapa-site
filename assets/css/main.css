@@ -184,3 +184,29 @@ body {
   @apply w-[134px] h-[300px] mx-auto border-x-4 border-x-aqua;
   transform : translateY(-380px);
 }
+
+.social-container {
+  @apply w-fit mx-auto border-4 border-aqua rounded-xl px-4 py-2;
+}
+
+.social-container .icon {
+  @apply w-[50px];
+}
+
+.social-container span {
+  @apply text-lg ml-5 text-white cursor-pointer;
+  transition : all .25s ease;
+}
+
+.social-container .social-row {
+  @apply my-3 flex items-center
+}
+
+.checkmark {
+  @apply w-[35px] ml-5
+
+}
+
+.social-container span:hover {
+  @apply underline;
+}
