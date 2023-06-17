@@ -113,12 +113,12 @@ body {
 }
 
 .projects-box {
-  @apply w-[65%] md:w-1/3 lg:w-[15%] mx-auto bg-dark;
+  @apply w-[65%] md:w-2/3 lg:w-[15%] mx-auto bg-dark;
 }
 
 .projects-box .house {
   @apply border-4 border-aqua rounded-t-2xl border-b-0
-  h-[400px] w-full relative top-[5px]
+  h-[400px] w-full relative top-[5px] z-50
   p-4 overflow-y-auto overflow-x-hidden bg-dark;
 }
 
@@ -147,15 +147,40 @@ body {
 }
 
 .project-info img {
-  @apply w-[50px] p-[7px] absolute block z-10 border-aqua cursor-pointer;
+  @apply w-[50px] p-[7px] block z-10 border-aqua cursor-pointer;
   transition : all .5s ease;
 }
+
 
 .project-info .github-icon {
   @apply rounded-l-lg border-4 border-r-0
 }
 
 .project-info .telegram-icon {
-  @apply rounded-r-lg border-4 border-l-0;
-  transform : translateX(200px);
+  @apply rounded-r-lg border-4 border-l-0 relative;
+  left : calc(100% - 54px);
+}
+
+.circle {
+  @apply rounded-[100%] border-4 border-aqua absolute
+}
+
+.radolyn-house {
+  @apply w-fit mx-auto p-5 border-4 border-aqua border-y-0
+  h-[250px]
+}
+
+.radolyn {
+  @apply w-[256px] mt-5 block mx-auto;
+  transform : translateY(-250px);
+}
+
+.half-circle {
+  border-radius: 12rem 12rem 0 0;
+  @apply mx-auto w-[304px] h-[147px] border-4 border-aqua border-b-0
+}
+
+.radolyn-house .tube {
+  @apply w-[134px] h-[300px] mx-auto border-x-4 border-x-aqua;
+  transform : translateY(-380px);
 }

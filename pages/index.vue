@@ -1,8 +1,10 @@
 <template>
   <div class="root">
-    <video id="background-video" autoplay loop muted poster="background.png">
-      <source src="shgBack.mp4" type="video/mp4">
-    </video>
+    <div class="w-screen h-screen overflow-hidden">
+      <video id="background-video" autoplay loop muted poster="background.png">
+        <source src="shgBack.mp4" type="video/mp4">
+      </video>
+    </div>
 
     <div class="w-screen h-screen absolute left-0 top-0">
       <div class="main-header">SHG</div>
@@ -49,19 +51,21 @@
                 ref="projectInfo"
                 :style="{'transform' : activeProject === -1 ? 'translateY(100px)' : 'translateY(20px)'}"
               >
-                <img
-                  src="@/static/github.svg"
-                  class="github-icon"
-                  @click="openTab('github')"
-                  :style="{ 'transform' : (activeProject === -1 || !hasGithubLink()) ? '' : 'translateX(-53px)'}"
-                />
+                <div class="grid grid-cols-2 absolute w-full z-10">
+                  <img
+                    src="@/static/github.svg"
+                    class="github-icon"
+                    @click="openTab('github')"
+                    :style="{ 'transform' : (activeProject === -1 || !hasGithubLink()) ? '' : 'translateX(-53px)'}"
+                  />
 
-                <img
-                  src="@/static/telegram.svg"
-                  class="telegram-icon"
-                  @click="openTab('telegram')"
-                  :style="{ 'transform' : (activeProject === -1 || !hasTelegramLink()) ? 'translateX(200px)' : 'translateX(253px)'}"
-                />
+                  <img
+                    src="@/static/telegram.svg"
+                    class="telegram-icon"
+                    @click="openTab('telegram')"
+                    :style="{ 'transform' : (activeProject === -1 || !hasTelegramLink()) ? 'translateX(0px)' : 'translateX(54px)'}"
+                  />
+                </div>
 
                 <div class="header">{{ $activeProject.title }}</div>
                 <div class="project-description">{{ $activeProject.desc }}</div>
@@ -81,6 +85,22 @@
               </div>
               <div class="first-floor">
                 <div class="wide-door"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="item" id="Social">
+          Social page
+        </div>
+
+        <div class="item" id="Team">
+          <div class="item-content">
+            <div class="w-fit mx-auto">
+              <div class="half-circle"></div>
+              <div class="radolyn-house">
+                <img src="@/static/radolyn.svg" class="radolyn"/>
+                <div class="tube"></div>
               </div>
             </div>
           </div>
@@ -106,13 +126,14 @@ export default {
   name: 'IndexPage',
   data() {
     return {
-      checkpoints: ['About', 'Projects', 'Social', 'Team'],
+      checkpoints: ['About', 'Projects', 'Social'],
       currentPoint: 'About',
       wheelRotation: 0,
       grassContainer: [],
       activeProject: -1,
       lastActiveProject: -1,
       showProjectLinks: false,
+      bubbles: [],
       projects: [
         {
           id: 0,
@@ -209,6 +230,25 @@ export default {
         return true
       }
     },
+    generateBubbles() {
+      // generate bubbles in the project page
+      let count = Math.floor(window.innerWidth / 180)
+
+      let numbers = []
+      for (let k = 80; k < 220; k++) {
+        numbers.push(k)
+      }
+
+      for (let i = 0; i <= count; i++) {
+        let size = this.$getRandomItem(numbers);
+        let pos = this.getRandomInt(window.innerWidth - size);
+
+        this.bubbles.push({
+          size: size,
+          left: pos
+        })
+      }
+    },
     projectHover(project) {
       this.activeProject = project.id
       this.lastActiveProject = project.id
@@ -231,6 +271,14 @@ export default {
           inline: "start",
           alignToTop: false
         })
+
+        switch (point) {
+          case 'Projects':
+            this.generateBubbles()
+            break
+          default:
+            break;
+        }
       }
     }
   },
@@ -245,6 +293,10 @@ export default {
 
     // generating grass on the floor
     let floorWidth = window.innerWidth
+    if (floorWidth < 500) {
+      return
+    }
+
     for (let i = 0; i < floorWidth / 250; i++) {
       let randomGrass = this.$getRandomItem([1, 2, 3, 4])
       this.grassContainer.push({
