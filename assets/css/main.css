@@ -1,0 +1,218 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+body {
+  @apply overflow-x-hidden;
+  font-family: 'Righteous', cursive;
+}
+
+.root {
+  @apply w-full;
+}
+
+#background-video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.main-header {
+  @apply px-8 py-4 border-[15px]
+  mx-auto w-fit text-9xl font-bold border-black
+  mt-[calc(50vh-95px)] backdrop-blur-sm;
+}
+
+.content-container {
+  @apply w-screen h-screen bg-dark pt-[15px];
+}
+
+.navigator {
+  @apply flex text-white w-fit mx-auto select-none
+  mb-[20px];
+}
+
+.navigator-point {
+  @apply px-4 pt-1 cursor-pointer text-lg rounded-md;
+  transition: all .15s linear;
+}
+
+.navigator .divider {
+  @apply w-[3px] h-[35px] mx-4 bg-white
+  relative top-[-2px]
+}
+
+.navigator-point:hover {
+  @apply text-aqua
+}
+
+.content-slider {
+  @apply w-screen overflow-x-auto overflow-y-hidden absolute;
+  bottom: -100vh;
+  white-space: nowrap;
+  height : 100vh;
+}
+
+.content-slider .item {
+  @apply w-screen inline-block overflow-hidden h-screen pt-[50px];
+  white-space: normal;
+}
+
+/* About block */
+
+.about-box {
+  @apply w-[80%] md:w-2/3 lg:w-1/4 mx-auto
+}
+
+.about-header {
+  @apply text-aqua border-4 border-aqua rounded-md px-3 py-2
+  w-full text-center text-lg bg-dark
+}
+
+.about-content {
+  @apply text-white w-[80%] mx-auto text-justify pt-2 bg-dark
+  border-l-4 border-r-4 border-aqua px-4 min-h-[250px];
+}
+
+.about-box .roof {
+  @apply w-[90%] block mx-auto;
+}
+
+.bottom {
+  @apply h-[100px] w-screen bg-aqua absolute bottom-[-100vh] left-0;
+}
+
+.bottom .grass-container {
+  @apply w-full mt-[-60px] flex;
+}
+
+.bottom .bird {
+  @apply w-[100px]
+}
+
+.grass-container img {
+  @apply max-h-[75px]
+}
+
+.bottom-header {
+  @apply mx-auto w-fit text-2xl font-bold mt-[34px]
+}
+
+.wheel-container {
+  @apply absolute w-[200vw] left-[-50vw] md:left-0 md:w-screen bottom-[-100px];
+}
+
+.wheel {
+  @apply w-[75%] md:w-2/3 lg:w-[40%] block mx-auto;
+  transition : all .1s ease;
+}
+
+.item-content {
+  @apply absolute bottom-[50px] w-screen z-50 flex
+}
+
+/*w-[65%] md:w-2/3 lg:w-[15%]*/
+
+.projects-box {
+  @apply w-fit mx-auto bg-dark;
+}
+
+.projects-box .house {
+  @apply border-4 border-aqua rounded-t-2xl border-b-0
+  h-[400px] w-full relative top-[5px] z-50
+  p-4 overflow-y-auto overflow-x-hidden bg-dark;
+}
+
+.projects-box .first-floor {
+  @apply w-full border-4 border-aqua h-[80px];
+}
+
+.projects-box .first-floor .wide-door {
+  @apply w-[50px] mx-auto h-[70px] mt-[10px]
+  rounded-tl-lg rounded-tr-lg bg-aqua
+}
+
+.project-info {
+  @apply w-[90%] mx-auto py-2 border-4 border-aqua
+  text-aqua border-b-0 rounded-t-lg pb-5;
+  transform : translateY(100px);
+  transition : all .25s ease;
+}
+
+.project-info .header {
+  @apply w-full text-xl text-center bg-dark z-50 relative px-2;
+}
+
+.project-info .project-description {
+  @apply w-full text-white bg-dark z-50 relative pt-1 px-2;
+}
+
+.project-info img {
+  @apply w-[50px] p-[7px] block z-10 border-aqua cursor-pointer;
+  transition : all .5s ease;
+}
+
+
+.project-info .github-icon {
+  @apply rounded-l-lg border-4 border-r-0
+}
+
+.project-info .telegram-icon {
+  @apply rounded-r-lg border-4 border-l-0 relative;
+  left : calc(100% - 54px);
+}
+
+.circle {
+  @apply rounded-[100%] border-4 border-aqua absolute
+}
+
+.radolyn-house {
+  @apply w-fit mx-auto p-5 border-4 border-aqua border-y-0
+  h-[250px]
+}
+
+.radolyn {
+  @apply w-[256px] mt-5 block mx-auto;
+  transform : translateY(-250px);
+}
+
+.half-circle {
+  border-radius: 12rem 12rem 0 0;
+  @apply mx-auto w-[304px] h-[147px] border-4 border-aqua border-b-0
+}
+
+.radolyn-house .tube {
+  @apply w-[134px] h-[300px] mx-auto border-x-4 border-x-aqua;
+  transform : translateY(-380px);
+}
+
+.social-container {
+  @apply w-fit mx-auto border-4 border-aqua rounded-xl px-4 py-2;
+}
+
+.social-container .icon {
+  @apply w-[50px];
+}
+
+.social-container span {
+  @apply text-lg ml-5 text-white cursor-pointer;
+  transition : all .25s ease;
+}
+
+.social-container .social-row {
+  @apply my-3 flex items-center
+}
+
+.checkmark {
+  @apply w-[35px] ml-5
+
+}
+
+.social-container span:hover {
+  @apply underline;
+}
